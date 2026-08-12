@@ -1,3 +1,544 @@
-"Shobhit Kumar Prabhakar" 
-<br />
-...
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Elite hacker-inspired landing page for Shobhit Kumar Prabhakar, also known as GeekLord." />
+  <title>Shobhit Kumar Prabhakar | GeekLord</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #020503;
+      --terminal: #00ff88;
+      --terminal-dim: rgba(0, 255, 136, 0.18);
+      --cyan: #1ffcff;
+      --violet: #8a5cff;
+      --amber: #f7ff65;
+      --text: #eafff5;
+      --muted: #8fb9a5;
+      --panel: rgba(2, 16, 10, 0.78);
+      --panel-strong: rgba(0, 255, 136, 0.28);
+      --danger: #ff3b7b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(0, 255, 136, 0.2), transparent 28rem),
+        radial-gradient(circle at 82% 20%, rgba(31, 252, 255, 0.16), transparent 24rem),
+        linear-gradient(135deg, #020503 0%, #06140d 52%, #020503 100%);
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      content: "";
+      background-image:
+        linear-gradient(rgba(0, 255, 136, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    .matrix {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      width: 100%;
+      height: 100%;
+      background: #020503;
+    }
+
+    .orb {
+      position: fixed;
+      z-index: -1;
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      filter: blur(34px);
+      opacity: 0.42;
+      animation: drift 16s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .orb--green {
+      top: 12%;
+      left: 8%;
+      background: var(--terminal);
+    }
+
+    .orb--cyan {
+      right: 6%;
+      bottom: 10%;
+      background: var(--cyan);
+      animation-delay: -6s;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 100vh;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      padding: 52px 0;
+      perspective: 1200px;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--panel-strong);
+      border-radius: 34px;
+      background: linear-gradient(145deg, rgba(0, 20, 12, 0.88), rgba(1, 10, 7, 0.64));
+      box-shadow: 0 0 0 1px rgba(31, 252, 255, 0.12), 0 36px 120px rgba(0, 0, 0, 0.72), inset 0 0 80px rgba(0, 255, 136, 0.06);
+      backdrop-filter: blur(18px);
+      transform-style: preserve-3d;
+      animation: heroTilt 9s ease-in-out infinite alternate;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      pointer-events: none;
+      content: "";
+    }
+
+    .hero::before {
+      inset: -1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.24), transparent);
+      transform: translateX(-100%);
+      animation: scan 4s linear infinite;
+    }
+
+    .hero::after {
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px);
+      mix-blend-mode: screen;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 42px;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      padding: clamp(34px, 7vw, 78px);
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 22px;
+      padding: 8px 14px;
+      border: 1px solid var(--panel-strong);
+      border-radius: 999px;
+      color: var(--terminal);
+      background: rgba(0, 255, 136, 0.08);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.86rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 0 22px rgba(0, 255, 136, 0.16);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      line-height: 0.88;
+      letter-spacing: -0.082em;
+      text-transform: uppercase;
+      text-shadow: 0 0 22px rgba(0, 255, 136, 0.2);
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(90deg, var(--terminal), var(--cyan), var(--amber));
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 18px rgba(0, 255, 136, 0.28));
+    }
+
+    .intro {
+      max-width: 660px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.72;
+    }
+
+    .terminal-line {
+      display: inline-block;
+      margin-top: 24px;
+      color: var(--terminal);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      text-shadow: 0 0 14px rgba(0, 255, 136, 0.48);
+    }
+
+    .terminal-line::after {
+      content: "_";
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+      transform: translateZ(26px);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-3px) translateZ(34px);
+      outline: 3px solid rgba(0, 255, 136, 0.26);
+      outline-offset: 3px;
+      box-shadow: 0 0 26px rgba(0, 255, 136, 0.22);
+    }
+
+    .button--primary {
+      background: linear-gradient(90deg, var(--terminal), var(--cyan));
+      color: #00150c;
+    }
+
+    .button--ghost {
+      border-color: var(--panel-strong);
+      background: rgba(0, 255, 136, 0.07);
+    }
+
+    .visual {
+      position: relative;
+      min-height: 520px;
+      transform-style: preserve-3d;
+    }
+
+    .cube {
+      position: absolute;
+      top: 44px;
+      left: 50%;
+      width: 148px;
+      height: 148px;
+      transform-style: preserve-3d;
+      animation: rotateCube 12s linear infinite;
+    }
+
+    .cube__face {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(0, 255, 136, 0.46);
+      background: rgba(0, 255, 136, 0.08);
+      color: var(--terminal);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-weight: 900;
+      box-shadow: inset 0 0 28px rgba(0, 255, 136, 0.18), 0 0 18px rgba(0, 255, 136, 0.16);
+    }
+
+    .cube__face:nth-child(1) { transform: rotateY(0deg) translateZ(74px); }
+    .cube__face:nth-child(2) { transform: rotateY(90deg) translateZ(74px); }
+    .cube__face:nth-child(3) { transform: rotateY(180deg) translateZ(74px); }
+    .cube__face:nth-child(4) { transform: rotateY(-90deg) translateZ(74px); }
+    .cube__face:nth-child(5) { transform: rotateX(90deg) translateZ(74px); }
+    .cube__face:nth-child(6) { transform: rotateX(-90deg) translateZ(74px); }
+
+    .card {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(100%, 390px);
+      padding: 28px;
+      border: 1px solid var(--panel-strong);
+      border-radius: 28px;
+      background: var(--panel);
+      box-shadow: 0 22px 80px rgba(0, 0, 0, 0.42), inset 0 0 36px rgba(0, 255, 136, 0.05);
+      transform: rotateY(-9deg) rotateX(5deg) translateZ(42px);
+    }
+
+    .avatar {
+      display: grid;
+      width: 128px;
+      height: 128px;
+      margin-bottom: 28px;
+      place-items: center;
+      border: 1px solid rgba(31, 252, 255, 0.5);
+      border-radius: 32px;
+      background: radial-gradient(circle at 30% 25%, var(--cyan), var(--terminal) 48%, #052014 50%);
+      color: #00150c;
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      box-shadow: 0 0 48px rgba(0, 255, 136, 0.32);
+      animation: pulseBadge 2.4s ease-in-out infinite;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 1.34rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 16px;
+      color: var(--text);
+      background: rgba(0, 255, 136, 0.06);
+      text-decoration: none;
+    }
+
+    .links a:hover,
+    .links a:focus-visible {
+      border-color: rgba(31, 252, 255, 0.72);
+      outline: none;
+    }
+
+    .floating-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .icon {
+      position: absolute;
+      width: 74px;
+      height: 74px;
+      color: var(--terminal);
+      opacity: 0.76;
+      filter: drop-shadow(0 0 16px rgba(0, 255, 136, 0.45));
+      animation: floatIcon 7s ease-in-out infinite;
+    }
+
+    .icon--shield { top: 10px; right: 8%; animation-delay: -1s; }
+    .icon--skull { top: 210px; left: 4%; color: var(--cyan); animation-delay: -3s; }
+    .icon--chip { right: 13%; bottom: 210px; color: var(--amber); animation-delay: -5s; }
+
+    @keyframes drift {
+      to { transform: translate3d(42px, -34px, 0) scale(1.08); }
+    }
+
+    @keyframes scan {
+      to { transform: translateX(100%); }
+    }
+
+    @keyframes heroTilt {
+      from { transform: rotateX(1deg) rotateY(-1.2deg); }
+      to { transform: rotateX(-1deg) rotateY(1.2deg); }
+    }
+
+    @keyframes rotateCube {
+      from { transform: translateX(-50%) rotateX(-22deg) rotateY(0deg); }
+      to { transform: translateX(-50%) rotateX(338deg) rotateY(360deg); }
+    }
+
+    @keyframes pulseBadge {
+      50% { transform: scale(1.04); box-shadow: 0 0 68px rgba(31, 252, 255, 0.42); }
+    }
+
+    @keyframes floatIcon {
+      50% { transform: translate3d(0, -22px, 44px) rotate(8deg) scale(1.08); }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @media (max-width: 860px) {
+      main { perspective: none; }
+
+      .hero,
+      .card,
+      .button {
+        transform: none;
+        animation-name: none;
+      }
+
+      .hero__content {
+        grid-template-columns: 1fr;
+      }
+
+      .visual {
+        min-height: 600px;
+      }
+
+      .card {
+        position: relative;
+        width: 100%;
+        margin-top: 210px;
+      }
+
+      .cube {
+        left: 50%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="matrix" aria-hidden="true"></canvas>
+  <div class="orb orb--green" aria-hidden="true"></div>
+  <div class="orb orb--cyan" aria-hidden="true"></div>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__content">
+        <div>
+          <p class="eyebrow">root@geeklord:~$ initializing elite mode</p>
+          <h1 id="hero-title">Shobhit Kumar <span>Prabhakar</span></h1>
+          <p class="intro">
+            Welcome to GeekLord's command center: a neon-lit launchpad for projects, profiles,
+            experiments, and the next clever exploit against ordinary interfaces.
+          </p>
+          <span class="terminal-line">access granted • systems online • trace impossible</span>
+          <nav class="actions" aria-label="Primary links">
+            <a class="button button--primary" href="https://shobhit.net/">Enter mainframe</a>
+            <a class="button button--ghost" href="https://github.com/GeekLord/">Inspect GitHub</a>
+            <a class="button button--ghost" href="https://linkedin.com/in/geeklord/">Open secure channel</a>
+          </nav>
+        </div>
+
+        <div class="visual" aria-label="Animated hacker profile module">
+          <div class="floating-icons" aria-hidden="true">
+            <svg class="icon icon--shield" viewBox="0 0 64 64" role="img">
+              <path fill="currentColor" d="M32 4 54 13v16c0 14-8.9 26.8-22 31C18.9 55.8 10 43 10 29V13l22-9Zm0 8.7-14 5.7V29c0 9.8 5.3 18.8 14 22.3C40.7 47.8 46 38.8 46 29V18.4l-14-5.7Z" />
+              <path fill="#020503" d="m29 37.4-8-8 4.2-4.2 3.8 3.8 10.8-10.8 4.2 4.2-15 15Z" />
+            </svg>
+            <svg class="icon icon--skull" viewBox="0 0 64 64" role="img">
+              <path fill="currentColor" d="M32 6C18.8 6 10 14.6 10 27.5c0 8.7 4.6 15.7 11 18.7V56h22V46.2c6.4-3 11-10 11-18.7C54 14.6 45.2 6 32 6Zm-9 27a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm18 0a6 6 0 1 1 0-12 6 6 0 0 1 0 12ZM28 46h-4v-6h4v6Zm6 0h-4v-6h4v6Zm6 0h-4v-6h4v6Z" />
+            </svg>
+            <svg class="icon icon--chip" viewBox="0 0 64 64" role="img">
+              <path fill="currentColor" d="M22 4h6v8h8V4h6v8h4a6 6 0 0 1 6 6v4h8v6h-8v8h8v6h-8v4a6 6 0 0 1-6 6h-4v8h-6v-8h-8v8h-6v-8h-4a6 6 0 0 1-6-6v-4H4v-6h8v-8H4v-6h8v-4a6 6 0 0 1 6-6h4V4Zm-2 16v24h24V20H20Zm6 6h12v12H26V26Z" />
+            </svg>
+          </div>
+
+          <div class="cube" aria-hidden="true">
+            <div class="cube__face">ROOT</div>
+            <div class="cube__face">0x01</div>
+            <div class="cube__face">SKP</div>
+            <div class="cube__face">INIT</div>
+            <div class="cube__face">SSH</div>
+            <div class="cube__face">PWN</div>
+          </div>
+
+          <aside class="card">
+            <div class="avatar" aria-hidden="true">SKP</div>
+            <h2>Operator profile: GeekLord.</h2>
+            <p>
+              Builder, technologist, and lifelong learner routing curiosity through secure,
+              fast-loading, high-signal web experiences.
+            </p>
+            <div class="links">
+              <a href="https://x.com/Shobhit/">X / Twitter <span aria-hidden="true">→</span></a>
+              <a href="https://g.dev/Shobhit/">Google Developer Profile <span aria-hidden="true">→</span></a>
+              <a href="https://github.com/GeekLord/GeekLord.github.io/">Site source <span aria-hidden="true">→</span></a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.querySelector('.matrix');
+    const context = canvas.getContext('2d');
+    const glyphs = '01{}[]<>/\\$#@ROOTGEKLRDSHPBTAKUMARPRABHKNx';
+    const fontSize = 16;
+    let columns = 0;
+    let drops = [];
+
+    function resizeMatrix() {
+      const pixelRatio = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(window.innerWidth * pixelRatio);
+      canvas.height = Math.floor(window.innerHeight * pixelRatio);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      columns = Math.ceil(window.innerWidth / fontSize);
+      drops = Array.from({ length: columns }, () => Math.random() * -80);
+    }
+
+    function drawMatrix() {
+      context.fillStyle = 'rgba(2, 5, 3, 0.12)';
+      context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      context.font = `${fontSize}px SFMono-Regular, Consolas, monospace`;
+
+      drops.forEach((drop, index) => {
+        const glyph = glyphs[Math.floor(Math.random() * glyphs.length)];
+        const x = index * fontSize;
+        const y = drop * fontSize;
+        context.fillStyle = Math.random() > 0.975 ? '#eafff5' : '#00ff88';
+        context.shadowColor = '#00ff88';
+        context.shadowBlur = 12;
+        context.fillText(glyph, x, y);
+
+        if (y > window.innerHeight && Math.random() > 0.966) {
+          drops[index] = 0;
+        } else {
+          drops[index] = drop + 1;
+        }
+      });
+
+      window.requestAnimationFrame(drawMatrix);
+    }
+
+    resizeMatrix();
+    drawMatrix();
+    window.addEventListener('resize', resizeMatrix);
+  </script>
+</body>
+</html>
