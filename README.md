@@ -7,3 +7,15 @@
 </div>
 
 # GeekLord.github.io
+
+Personal GitHub Pages landing page for GeekLord / Shobhit Kumar Prabhakar.
+
+## Performance notes
+
+- The `index.html` page uses a canvas-based matrix rain background plus CSS-powered
+  holographic interface effects.
+- The matrix animation is intentionally capped to roughly 24 FPS, limits high-DPI
+  canvas scaling, pauses while the tab is hidden, and honors
+  `prefers-reduced-motion` so the page stays responsive on lower-power devices.
+- If you add new visual effects, keep animations bounded and avoid unthrottled
+  render loops that run when the page is not visible.
