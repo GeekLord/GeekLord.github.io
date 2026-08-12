@@ -717,15 +717,18 @@ build / learn / ship / repeat</pre>
 
   <script>
     const canvas = document.querySelector('.matrix');
-    const context = canvas.getContext('2d');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const context = canvas.getContext('2d', { alpha: false });
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const glyphs = '01{}[]<>/\\$#@ROOTGEEKLORDSHOBHITKUMARPRABHAKARsudoSSH0x';
-    const fontSize = 16;
+    const fontSize = 18;
+    const targetFrameMs = 1000 / 24;
     let columns = 0;
     let drops = [];
+    let animationFrame = 0;
+    let lastFrameTime = 0;
 
     function resizeMatrix() {
-      const pixelRatio = window.devicePixelRatio || 1;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.floor(window.innerWidth * pixelRatio);
       canvas.height = Math.floor(window.innerHeight * pixelRatio);
       canvas.style.width = `${window.innerWidth}px`;
@@ -735,31 +738,57 @@ build / learn / ship / repeat</pre>
       drops = Array.from({ length: columns }, () => Math.random() * -90);
     }
 
-    function drawMatrix() {
-      context.fillStyle = 'rgba(1, 3, 2, 0.13)';
+    function paintMatrixFrame() {
+      context.fillStyle = 'rgba(1, 3, 2, 0.18)';
       context.fillRect(0, 0, window.innerWidth, window.innerHeight);
       context.font = `${fontSize}px SFMono-Regular, Consolas, monospace`;
+      context.shadowColor = '#00ff8a';
+      context.shadowBlur = 4;
 
       drops.forEach((drop, index) => {
         const glyph = glyphs[Math.floor(Math.random() * glyphs.length)];
         const x = index * fontSize;
         const y = drop * fontSize;
-        context.fillStyle = Math.random() > 0.972 ? '#effff6' : '#00ff8a';
-        context.shadowColor = '#00ff8a';
-        context.shadowBlur = 12;
+        context.fillStyle = Math.random() > 0.985 ? '#effff6' : '#00ff8a';
         context.fillText(glyph, x, y);
 
         drops[index] = y > window.innerHeight && Math.random() > 0.962 ? 0 : drop + 1;
       });
+    }
 
-      if (!prefersReducedMotion) {
-        window.requestAnimationFrame(drawMatrix);
+    function drawMatrix(timestamp = 0) {
+      if (document.hidden || motionQuery.matches) {
+        animationFrame = 0;
+        return;
+      }
+
+      if (timestamp - lastFrameTime >= targetFrameMs) {
+        lastFrameTime = timestamp;
+        paintMatrixFrame();
+      }
+
+      animationFrame = window.requestAnimationFrame(drawMatrix);
+    }
+
+    function startMatrix() {
+      if (!animationFrame && !motionQuery.matches && !document.hidden) {
+        animationFrame = window.requestAnimationFrame(drawMatrix);
       }
     }
 
     resizeMatrix();
-    drawMatrix();
-    window.addEventListener('resize', resizeMatrix);
+    paintMatrixFrame();
+    startMatrix();
+    window.addEventListener('resize', resizeMatrix, { passive: true });
+    document.addEventListener('visibilitychange', startMatrix);
+    motionQuery.addEventListener('change', () => {
+      if (motionQuery.matches && animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      } else {
+        startMatrix();
+      }
+    });
   </script>
 </body>
 </html>
